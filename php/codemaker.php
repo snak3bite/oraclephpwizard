@@ -198,7 +198,7 @@ class Codemaker {
   }
 
   //------------------------------------------------------------------
-  function make_class( $as_pack, $as_proc, $verbose) {
+  function make_class( $as_uname, $as_pack, $as_proc, $verbose) {
 
     $this->verbose = $verbose;
 
@@ -209,7 +209,7 @@ class Codemaker {
     }
 
     $lserr = "";
-    $lierr = $apc->get_params( $as_pack, $as_proc, $lparams, $lserr );
+    $lierr = $apc->get_params( $as_uname, $as_pack, $as_proc, $lparams, $lserr );
 
     if ( $lierr != 0 ) {
       return ( "Failed to get parameters." . $lserr );
@@ -221,28 +221,28 @@ class Codemaker {
     while ( $entry = oci_fetch_assoc ( $lparams ) ) {
 
       $this->allparams[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
-      if ( $entry[ 'DATA_TYPE' ] == 102 ) {
+      if ( $entry[ 'DATA_TYPE' ] == 'ORATYPE_REF_CURSOR' ) {
         $this->curs[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
         $this->havecursors = true;
 
       } elseif ( $entry[ 'IN_OUT' ] == 'OUT' ) {
         $this->outs[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
         $this->declvarsize[ $idx ] = '$len' . $entry[ 'ARGUMENT_NAME' ];
-        $this->declvarsize[ $idx ] .= ' = ' . ORATYPESIZEPREFIX . $this->get_size_of_constantants( $entry[ 'DATA_TYPE' ] ) . ';';
-        $this->outstub[ $idx ] = "echo \$proc->get_output( '" . $entry[ 'ARGUMENT_NAME' ] . "' ); // " . $this->get_size_of_constantants( $entry[ 'DATA_TYPE' ] );
+        $this->declvarsize[ $idx ] .= ' = ' . ORATYPESIZEPREFIX . $this->check_datatype( $entry[ 'DATA_TYPE' ] ) . ';';
+        $this->outstub[ $idx ] = "echo \$proc->get_output( '" . $entry[ 'ARGUMENT_NAME' ] . "' ); // " . $this->check_datatype( $entry[ 'DATA_TYPE' ] );
 
       } elseif ( $entry[ 'IN_OUT' ] == 'IN/OUT' ) {
         $this->ins[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
         $this->declvarsize[ $idx ] = '$len' . $entry[ 'ARGUMENT_NAME' ];
-        $this->declvarsize[ $idx ] .= ' = ' . ORATYPESIZEPREFIX . $this->get_size_of_constantants( $entry[ 'DATA_TYPE' ] ) . ';';
+        $this->declvarsize[ $idx ] .= ' = ' . ORATYPESIZEPREFIX . $this->check_datatype( $entry[ 'DATA_TYPE' ] ) . ';';
         $this->insize[ $idx ] = '$this->len' . $entry[ 'ARGUMENT_NAME' ];
-        $this->outstub[ $idx ] = "echo \$inargs[ '" . $entry[ 'ARGUMENT_NAME' ] . "' ]; // " . $this->get_size_of_constantants( $entry[ 'DATA_TYPE' ] ) . ' (IN/OUT)';
-        $this->instub[ $idx ] = "\$inargs[ '" . $entry[ 'ARGUMENT_NAME' ] . "' ] = \$value; // " . $this->get_size_of_constantants( $entry[ 'DATA_TYPE' ] );
+        $this->outstub[ $idx ] = "echo \$inargs[ '" . $entry[ 'ARGUMENT_NAME' ] . "' ]; // " . $this->check_datatype( $entry[ 'DATA_TYPE' ] ) . ' (IN/OUT)';
+        $this->instub[ $idx ] = "\$inargs[ '" . $entry[ 'ARGUMENT_NAME' ] . "' ] = \$value; // " . $this->check_datatype( $entry[ 'DATA_TYPE' ] );
 
       } elseif ( $entry[ 'IN_OUT' ] == 'IN' ) {
         $this->ins[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
         $this->insize[ $idx ] = '-1';
-        $this->instub[ $idx ] = "\$inargs[ '" . $entry[ 'ARGUMENT_NAME' ] . "' ] = \$value; // " . $this->get_size_of_constantants( $entry[ 'DATA_TYPE' ] );
+        $this->instub[ $idx ] = "\$inargs[ '" . $entry[ 'ARGUMENT_NAME' ] . "' ] = \$value; // " . $this->check_datatype( $entry[ 'DATA_TYPE' ] );
       }
       $idx++;
     }
@@ -359,79 +359,26 @@ class Codemaker {
   }
 
   //------------------------------------------------------------------
-  public function get_size_of_constantants ( $type ) {
+  public function check_datatype( $datatype ) {
 
-    if ( $type == 1 ) {
-      $retval="ORATYPE_VARCHAR2";
-    } elseif ( $type == 2 ) {
-      $retval="ORATYPE_NUMBER";
-    } elseif ( $type == 3 ) {
-      $retval="ORATYPE_SINT";
-    } elseif ( $type == 4 ) {
-      $retval="ORATYPE_FLOAT";
-      //8 = LONG ?
-    } elseif ( $type == 9 ) {
-      if ($this->verbose) {
-        $retval="ORATYPE_VARCHAR // WARNING: Might be 'NCHAR VARYING'";
-      } else {
-        $retval="ORATYPE_VARCHAR";
-      }
-    } elseif ( $type == 11 || $type == 69 || $type == 104 ) {
-      $retval="ORATYPE_ROWID";
-    } elseif ( $type == 12 ) {
-      $retval="ORATYPE_DATE";
-    } elseif ( $type == 23 ) {
-      $retval="ORATYPE_RAW";
-      //24 = LONG_RAW ?
-      //29 = BINARY_INTEGER --> ORATYPE_SIGNED32 ?
-    } elseif ( $type == 96 ) {
-      if ($this->verbose) {
-        $retval="ORATYPE_CHAR // WARNING: Might be 'NCHAR'";
-      } else {
-        $retval="ORATYPE_CHAR";
-      }
-    } elseif ( $type == 102 ) {
-      $retval="ORATYPE_CURSOR";
-    } elseif ( $type == 105 || $type == 106 ) {
-      $retval="ORATYPE_MLSLABEL";
-    } elseif ( $type == 110 || $type == 111 ) {
-      $retval="ORATYPE_REF";
-    } elseif ( $type == 112 ) {
-      if ($this->verbose) {
-        $retval="ORATYPE_CLOB // WARNING: Might be 'NCLOB'";
-      } else {
-
-        $retval="ORATYPE_CLOB";
-      }
-    } elseif ( $type == 113 ) {
-      $retval="ORATYPE_BLOB";
-    } elseif ( $type == 114 ) {
-      $retval="ORATYPE_BFILE";
-    } elseif ( $type == 115 ) {
-      $retval="ORATYPE_CFILE";
-      //121 = OBJECT ?
-    } elseif ( $type == 122 ) {
-      $retval="ORATYPE_TABLE";
-    } elseif ( $type == 123 ) {
-
-      $retval="ORATYPE_VARRAY";
-
-      // 178 = TIME ?
-      // 179 = TIME WITH TIME ZONE ?
-      // 180 = TIMESTAMP ?
-      // 181 = TIMESTAMP WITH TIME ZONE ?
-      // 182 = INTERVAL YEAR TO MONTH ?
-      // 183 = INTERVAL DAY TO SECOND ?
+    if ( $datatype == "ORATYPE_VARCHAR2" ||
+          $datatype == "ORATYPE_NUMBER" ||
+          $datatype == "ORATYPE_SINT" ||
+          $datatype == "ORATYPE_FLOAT" ||
+          $datatype == "ORATYPE_VARCHAR" ||
+          $datatype == "ORATYPE_DATE" ||
+          $datatype == "ORATYPE_RAW" ||
+          $datatype == "ORATYPE_CHAR" ||
+          $datatype == "ORATYPE_REF_CURSOR" ||
+          $datatype == "ORATYPE_CLOB" ||
+          $datatype == "ORATYPE_BLOB" ||
+          $datatype == "ORATYPE_BFILE" ||
+          $datatype == "ORATYPE_CFILE" ||
+          $datatype == "ORATYPE_TABLE" ||
+          $datatype == "ORATYPE_VARRAY" ) {
+      $retval = $datatype;
     } else {
-
-      // don't have a clue!
-      if ( $this->verbose ) {
-
-        $retval = "FALLBACK // WARNING: Couldn't parse argument type! Not familiar with argument code: " . $type ;
-      } else {
-
-        $retval = "FALLBACK";
-      }
+      $retval = "FALLBACK";
     }
     return ( $retval );
   }

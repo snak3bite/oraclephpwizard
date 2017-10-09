@@ -24,18 +24,19 @@ class AutoProcCaller {
   }
   //------------------------------------------------------------------
   // Get parameters for procedure $as_proc in package $as_pack
-  function get_params( $as_pack, $as_proc, &$a_lista_params, &$as_err ) {
+  function get_params( $av_uname, $as_pack, $as_proc, &$a_lista_params, &$as_err ) {
     $retval = 0;
 
-    $ls_plsqlstmnt='BEGIN PCK_OPW_PROCINFO.ARG_NAMES(
+    $ls_plsqlstmnt='BEGIN PCK_OPW_PROCINFO.ARG_NAMEZ(
+      :avi_uname,
       :avi_pack_n,
       :avi_proc_n,
       :aro_params);END;';
 
     $stmt = oci_parse( $this->lconn, $ls_plsqlstmnt );
 
+    oci_bind_by_name( $stmt, ":avi_uname", $av_uname, -1 );
     oci_bind_by_name( $stmt, ":avi_pack_n", $as_pack, -1 );
-
     oci_bind_by_name( $stmt, ":avi_proc_n", $as_proc, -1 );
 
     $a_lista_params = oci_new_cursor( $this->lconn );

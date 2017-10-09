@@ -5,7 +5,10 @@ define( "DB_CONNSTR", "localhost/XE" );
 
 define( "COMPANY", "KXE Styrteknik AB" );
 
-// Path and filename to default definitions of default sizes for oracle types
+// Path to save files to
+define( "REPO", "/var/www/html/rw" );
+
+// Path and filename to definitions of default sizes for oracle types
 define( "DEFSIZELOCATION", "/var/www/html/projects/oraclephpwizard/php/defsizes.php" );
 
 // Prefix for oracle types default size constants
