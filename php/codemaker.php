@@ -198,12 +198,13 @@ class Codemaker {
   }
 
   //------------------------------------------------------------------
-  function make_class( $as_uname, $as_pack, $as_proc, $verbose) {
+  function make_class( $apc, $as_uname, $as_pack, $as_proc, $verbose) {
 
     $this->verbose = $verbose;
 
-    $apc = new AutoProcCaller();
-
+    //$apc = new AutoProcCaller();
+    
+    // Connect, seems i doesn't matter to do it twice
     if ( ! $apc->connectdb() ) {
       return ( "Failed to connect db!" );
     }
