@@ -356,6 +356,9 @@ class Codemaker {
           $retval = 0;
       }
     }
+    if ( $retval != 0 ) {
+      $this->filename = "";
+    }
     return( $retval );
   }
 
