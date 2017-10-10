@@ -10,7 +10,7 @@ if ( ! $apc->connectdb() ) {
 } else {
 
   echo "Test get_params:" . NL;
-  $licode = $apc->get_params( DB_USER, 'PCK_OPW_TEST', 'prc_get_chapters', $l_lista_params, $ls_err );
+  $licode = $apc->get_params( ORACLE_OBJECT_OWNER, 'PCK_OPW_TEST', 'prc_get_chapters', $l_lista_params, $ls_err );
   if ( $licode != 0 ) {
     echo "Failed prc_get_chapters: " . $ls_err;
   } else {

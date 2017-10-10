@@ -11,7 +11,7 @@ echo "<html><body><pre>";
 $lpack = 'PCK_OPW_TEST';
 $lproc = 'PRC_GET_CHAPTERS';
 
-$code = $cm->make_class( $apc, DB_USER, $lpack, $lproc, false );
+$code = $cm->make_class( $apc, ORACLE_OBJECT_OWNER, $lpack, $lproc, false );
 echo 'Test make_class: ' . NL . '//-------------------------------' . NL;
 echo $code;
 echo NL . '//-------------------------------' . NL;
