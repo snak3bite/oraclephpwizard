@@ -11,6 +11,12 @@ define( "COMPANY", "KXE Styrteknik AB" );
 // Path to save files to
 define( "REPO", "/var/www/html/rw" );
 
+// Include prisma, nicifyer for code on web package
+// Downloaf prisma from http://prismjs.com/download.html
+// You only need support for PHP
+define( "PRISMA_CSS", '<link href="prism.css" rel="stylesheet" />' );
+define( "PRISMA_JS", '<script src="prism.js"></script>' );
+
 // Path and filename to definitions of default sizes for oracle types
 define( "DEFSIZELOCATION", "/var/www/html/projects/oraclephpwizard/php/defsizes.php" );
 
