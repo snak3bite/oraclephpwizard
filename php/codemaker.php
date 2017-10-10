@@ -201,10 +201,9 @@ class Codemaker {
   function make_class( $apc, $as_uname, $as_pack, $as_proc, $verbose) {
 
     $this->verbose = $verbose;
+    $this->init = false;
 
-    //$apc = new AutoProcCaller();
-    
-    // Connect, seems i doesn't matter to do it twice
+    // Connect (seems it doesn't matter to do it twice)
     if ( ! $apc->connectdb() ) {
       return ( "Failed to connect db!" );
     }
@@ -247,13 +246,14 @@ class Codemaker {
       }
       $idx++;
     }
-    $this->init = true;
 
     if ( $as_pack ) {
       $classname = $as_pack . '__' . $as_proc;
     } else {
       $classname = $as_proc;
     }
+
+    $this->init = true;
 
     $retval = $this->start_of_class( $classname );
     $retval .= $this->middle_of_class ( $as_pack, $as_proc );
@@ -270,7 +270,7 @@ class Codemaker {
     if ( ! $this->init ){
       return ('Run make_class first');
     }
-    // stub starts here
+    // stub skeleton here
     if  ( $this->filename ) {
       $retval = IND1 . 'require_once( "' . $this->filename . '" );' . SNL . SBLANKLINE;
     } else {
@@ -308,7 +308,7 @@ class Codemaker {
     }
 
     $retval .= IND1 . '}' . SNL;
-    // Stub ends here
+    // skeleton ends here
     return( $retval );
   }
 
@@ -382,6 +382,11 @@ class Codemaker {
       $retval = "FALLBACK";
     }
     return ( $retval );
+  }
+
+  //------------------------------------------------------------------
+  public function get_init_status() {
+    return( $this->init );
   }
 }
 ?>
