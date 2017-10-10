@@ -1,5 +1,5 @@
 # Oracle PHP Wizard
-A tool that creates the php code needed to connect to oracle procedures
+A Web-Based tool that creates the php code needed to connect to oracle procedures
 
 ## For who and why
 This is for you who write php pages connecting to oracle stored procedures and is sick of the tedius work writing the connections.
