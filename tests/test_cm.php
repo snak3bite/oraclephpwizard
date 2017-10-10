@@ -1,14 +1,17 @@
 <?php
 require_once( "../php/config.php" );
+require_once( "../php/autoproccaller.php" );
 require_once( "../php/codemaker.php" );
+
+$apc = new AutoProcCaller();
+$cm = new Codemaker();
 
 echo "<html><body><pre>";
 
 $lpack = 'PCK_OPW_TEST';
 $lproc = 'PRC_GET_CHAPTERS';
 
-$cm = new Codemaker();
-$code = $cm->make_class( DB_USER, $lpack, $lproc, false );
+$code = $cm->make_class( $apc, DB_USER, $lpack, $lproc, false );
 echo 'Test make_class: ' . NL . '//-------------------------------' . NL;
 echo $code;
 echo NL . '//-------------------------------' . NL;
