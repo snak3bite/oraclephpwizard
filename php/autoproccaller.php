@@ -32,7 +32,7 @@ class AutoProcCaller {
   function get_params( $av_uname, $as_pack, $as_proc, &$a_lista_params, &$as_err ) {
     $retval = 0;
 
-    $ls_plsqlstmnt='BEGIN PCK_OPW_PROCINFO.ARG_NAMEZ(
+    $ls_plsqlstmnt='BEGIN '.ORACLE_OBJECT_OWNER.'.PCK_OPW_PROCINFO.ARG_NAMEZ(
       :avi_uname,
       :avi_pack_n,
       :avi_proc_n,
@@ -65,7 +65,7 @@ class AutoProcCaller {
   function fnc_proc_prc_packages( $av_uname, &$ao_cur, &$as_err ) {
     $retval = 0;
 
-    $ls_plsqlstmnt='Begin PCK_OPW_PROCINFO.PRC_PACKAGES( :AVI_UNAME, :ARO_PACKS );end;';
+    $ls_plsqlstmnt='Begin '.ORACLE_OBJECT_OWNER.'.PCK_OPW_PROCINFO.PRC_PACKAGES( :AVI_UNAME, :ARO_PACKS );end;';
 
     $stmt = oci_parse( $this->lconn, $ls_plsqlstmnt );
 
@@ -93,7 +93,7 @@ class AutoProcCaller {
 
     $retval = 0;
 
-    $ls_plsqlstmnt="Begin PCK_OPW_PROCINFO.PRC_PROCS(:AVI_UNAME,:AVI_PACK,:ARO_PROCS);end;";
+    $ls_plsqlstmnt="Begin ".ORACLE_OBJECT_OWNER.".PCK_OPW_PROCINFO.PRC_PROCS(:AVI_UNAME,:AVI_PACK,:ARO_PROCS);end;";
 
     $stmt = oci_parse( $this->lconn, $ls_plsqlstmnt );
 
