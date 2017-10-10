@@ -11,7 +11,7 @@ OPW is not intended to use on a public available server. For your own good only 
 * Oracle Instant Client (tested with version 12.2)
 
 ## In oracle
-Download and compile pck_opw_procinfo.sql. Make shure that you connect with the same user that owns the packages and procedures that you want to create code for. You can for example do this in SQL Developer or in SQLPlus. In the latter you would do: 
+Download and compile pck_opw_procinfo.sql. Make sure that you connect with the same user that owns the packages and procedures that you want to create code for. You can for example do this in SQL Developer or in SQLPlus. In the latter you would do: 
 ```
 SQL> @pck_opw_procinfo.sql
 
