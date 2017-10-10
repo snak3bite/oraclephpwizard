@@ -68,18 +68,18 @@ create or replace package body pck_opw_procinfo is
 
     if avi_pack is null then
       open aro_procs for
-        select object_name
+        select object_name pname
           from sys.all_objects
          where owner = upper(avi_uname)
            and object_type = 'PROCEDURE'
          order by object_name;
     else
       open aro_procs for
-        select procedure_name
+        select procedure_name pname
           from sys.all_procedures
          where owner = upper(avi_uname)
            and object_name = upper(avi_pack)
-         order by object_name;
+         order by procedure_name;
     end if;
   end prc_procs;
 
