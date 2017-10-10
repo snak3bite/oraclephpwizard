@@ -287,7 +287,7 @@ class Codemaker {
     $retval .= IND1 . "\$proc = new " . $this->classname. "( \$dbconn, \$inargs );". SNL . SBLANKLINE;
 
     $retval .= IND1 . "if ( ! \$proc->exec() ) {". SNL;
-    $retval .= IND2 . "echo 'Fail: ' . get_errcode() . ' ' . get_errmsg();". SNL;
+    $retval .= IND2 . "echo 'Fail: ' . \$proc->get_errcode() . ' ' . \$proc->get_errmsg();". SNL;
     $retval .= IND1 . "} else {". SNL;
     $retval .= SBLANKLINE;
 
