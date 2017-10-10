@@ -17,7 +17,6 @@ SQL> @pck_opw_procinfo.sql
 
 Package created.
 
-
 Package body created.
 
 SQL> 
@@ -59,8 +58,8 @@ Next up is ORACLE_OBJECT_OWNER. You only need to change this if the owner of the
 If you for example compile procedures with user 'dbadmin' and let OPW connect to db with 'dbopw', then this is how you do it
 ```
 define( "DB_USER", "dbopw" );
-// The owner of packages and procedures
 ...
+// The owner of packages and procedures
 define( "ORACLE_OBJECT_OWNER", 'dbadmin' );
 ```
 The only thing OPW does in your database is connect and execute the stored procedures in package PCK_OPW_PROCINFO so you might 
@@ -69,7 +68,7 @@ very well only let 'dbopw' just have those privliges and nothing more. Like this
 CREATE USER dbopw IDENTIFIED BY dbopw DEFAULT TABLESPACE USERS;
 GRANT CONNECT TO dbopw;
 
-GRANT EXECUTE ON PCK_OPW_PROCINFO  TO dbopw;
+GRANT EXECUTE ON PCK_OPW_PROCINFO TO dbopw;
 ```
 
 If you want OPW to save the class-files to the file system you need to specify a directory where Apache have write privileges.
@@ -99,4 +98,4 @@ Make sure you slect minimized version and unselect everything but PHP. Download 
 (or edit config.php accordingly).
 
 ### Done
-open http://localhost/var/www/html/opw/opw.php and hopefully it works :)
+open http://localhost/opw/opw.php and hopefully it works :)
