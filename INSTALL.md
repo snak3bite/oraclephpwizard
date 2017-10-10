@@ -31,7 +31,7 @@ SQL > @/the/path/pck_opw_procinfo.sql
 Installing and configure Apache and PHP is outside the scope of this document. The web is full of tutorials ...
 Note: If using CentOS remember SE Linux is always happier when files are copied to the directories for Apache and not moved, i.e. dont use mv ...
 
-You need all files php-files in
+You need all php-files in
 https://github.com/snak3bite/oraclephpwizard/tree/master/php
 
 Put all of them in the same directory and chmod and chown them as suiteable for your server.
