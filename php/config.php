@@ -1,15 +1,15 @@
 <?php
-define( "DB_USER", "OPW" );
-define( "DB_PASSWORD", "opw" );
+define( "DB_USER", "dbopw" );
+define( "DB_PASSWORD", "dbopw" );
 define( "DB_CONNSTR", "localhost/XE" );
 
 // The owner of packages and procedures
-define( "ORACLE_OBJECT_OWNER", DB_USER );
-
-define( "COMPANY", "KXE Styrteknik AB" );
+define( "ORACLE_OBJECT_OWNER", "opw" );
 
 // Path to save files to
 define( "REPO", "/var/www/html/rw" );
+
+define( "COMPANY", "KXE Styrteknik AB" );
 
 // Include prisma, nicifier for code on web pages
 // Download prisma from http://prismjs.com/download.html
