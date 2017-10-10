@@ -8,12 +8,12 @@ Oracle PHP Wizard let you concentrate on the fun stuff!
 ## How
 Say you have this procedure
 ```
-create or replace package pck_opw_procinfo is
-  procedure prc_get_chapters(ahid in number,
-                             ahc in out number,
-                             aheader out varchar2,
-                             aheader2 out varchar2,
-                             achapters out sys_refcursor);
+  create or replace package pck_opw_test is
+    procedure prc_get_chapters(ahid in number,
+                               ahc in out number,
+                               aheader out varchar2,
+                               aheader2 out varchar2,
+                               achapters out sys_refcursor);
 ```
 On the OPW web page you select the package and procedure and OPW creates a class for you and a code snippet on how to use it, like this (yes it works with procedures without package as well):
 ```
