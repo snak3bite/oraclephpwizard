@@ -8,6 +8,7 @@ Oracle PHP Wizard let you concentrate on the fun stuff!
 ## How
 Say you have this procedure
 ```
+create or replace package pck_opw_procinfo is
   procedure prc_get_chapters(ahid in number,
                              ahc in out number,
                              aheader out varchar2,
