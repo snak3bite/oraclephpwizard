@@ -8,7 +8,7 @@ class AutoProcCaller {
   private $as_err;
 
 //------------------------------------------------------------------
-  function connectdb() {
+  public function connectdb() {
     $retval = true;
     $this->lconn = oci_connect( DB_USER, DB_PASSWORD, DB_CONNSTR );
     if ( ! $this->lconn ) {
@@ -19,6 +19,11 @@ class AutoProcCaller {
     }
     return $retval;
   }
+  //------------------------------------------------------------------
+  public function get_connection() {
+    return( $this->lconn );
+  }
+  //------------------------------------------------------------------
   public function get_errmsg() {
     return( $this->as_err );
   }
