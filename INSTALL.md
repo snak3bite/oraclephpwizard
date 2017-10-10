@@ -49,20 +49,29 @@ If it is a default install of Apache this will do
 ### Edit config.php
 Most important are the first lines, thats the info needed for opw to connect to Oracle
 ```
-define( "DB_USER", "OPW" );
-define( "DB_PASSWORD", "opw" );
+define( "DB_USER", "dbopw" );
+define( "DB_PASSWORD", "opwxc1#.04-deKDOo139jdOD" );
 define( "DB_CONNSTR", "localhost/XE" );
 ```
 
 Next up is ORACLE_OBJECT_OWNER. You only need to change this if the owner of the procedures that you want to create code for is a different user that connects to the database.
 
-If you for example compile procedures with user 'dbadmin' and web server connect to db with 'dbweb', then this is how you do it
+If you for example compile procedures with user 'dbadmin' and let OPW connect to db with 'dbopw', then this is how you do it
 ```
-define( "DB_USER", "dbweb" );
+define( "DB_USER", "dbopw" );
 // The owner of packages and procedures
 ...
 define( "ORACLE_OBJECT_OWNER", 'dbadmin' );
 ```
+The only thing OPW does in your database is connect and execute the stored procedures in package PCK_OPW_PROCINFO so you might 
+very well only let 'dbopw' just have those privliges and nothing more. Like this:
+```
+CREATE USER dbopw IDENTIFIED BY dbopw DEFAULT TABLESPACE USERS;
+GRANT CONNECT TO dbopw;
+
+GRANT EXECUTE ON PCK_OPW_PROCINFO  TO dbopw;
+```
+
 If you want OPW to save the class-files to the file system you need to specify a directory where Apache have write privileges.
 ```
 // Path to save files to
