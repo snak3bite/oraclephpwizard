@@ -3,6 +3,9 @@ define( "DB_USER", "OPW" );
 define( "DB_PASSWORD", "opw" );
 define( "DB_CONNSTR", "localhost/XE" );
 
+// The owner of packages and procedures
+define( "ORACLE_OBJECT_OWNER", DB_USER );
+
 define( "COMPANY", "KXE Styrteknik AB" );
 
 // Path to save files to
