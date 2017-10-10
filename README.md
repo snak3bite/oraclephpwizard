@@ -15,7 +15,7 @@ create or replace package pck_opw_procinfo is
                              aheader2 out varchar2,
                              achapters out sys_refcursor);
 ```
-On the OPW web page you select the package (if applicable) and procedure and OPW creates a class for you and a code snippet on how to use it, like this:
+On the OPW web page you select the package and procedure and OPW creates a class for you and a code snippet on how to use it, like this (yes it works with procedures without package as well):
 ```
   require_once( "pck_opw_test.prc_get_chapters.php" );
 
