@@ -32,7 +32,7 @@ class AutoProcCaller {
   function get_params( $av_uname, $as_pack, $as_proc, &$a_lista_params, &$as_err ) {
     $retval = 0;
 
-    $ls_plsqlstmnt='BEGIN '.ORACLE_OBJECT_OWNER.'.PCK_OPW_PROCINFO.ARG_NAMEZ(
+    $ls_plsqlstmnt='BEGIN '.ORACLE_OBJECT_OWNER.'.PCK_OPW_PROCINFO.ARG_NAMES(
       :avi_uname,
       :avi_pack_n,
       :avi_proc_n,

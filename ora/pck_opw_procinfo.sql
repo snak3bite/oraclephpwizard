@@ -1,5 +1,5 @@
 create or replace package pck_opw_procinfo is
-  procedure arg_namez(avi_uname in varchar2,
+  procedure arg_names(avi_uname in varchar2,
                       avi_pack_n in varchar2,
                       avi_proc_n in varchar2,
                       aro_params out sys_refcursor);
@@ -16,7 +16,7 @@ end pck_opw_procinfo;
 /
 create or replace package body pck_opw_procinfo is
 
-  procedure arg_namez(avi_uname in varchar2,
+  procedure arg_names(avi_uname in varchar2,
                       avi_pack_n in varchar2,
                       avi_proc_n in varchar2,
                       aro_params out sys_refcursor) is
@@ -45,7 +45,7 @@ create or replace package body pck_opw_procinfo is
            and object_name = upper(avi_proc_n)
          order by position;
     end if;
-  end arg_namez;
+  end arg_names;
 
   ---------------------------------------------------------------------
   procedure prc_packages(avi_uname in varchar2, aro_packs out sys_refcursor) is
