@@ -2,19 +2,20 @@
 A Web-Based tool that creates the php code needed to connect to oracle procedures
 
 ## For who and why
-This is for you who write php pages connecting to oracle stored procedures and are sick of the tedius work writing the connections.
+This is for you who write php pages connecting to oracle stored procedures and are sick of the tedious work writing the connections.
 Oracle PHP Wizard let you concentrate on the fun stuff!
 
 ## How
-Say you have this procedure
+Say you have this procedure:
 ```
-  procedure prc_get_chapters(ahid in number,
-                             ahc in out number,
-                             aheader out varchar2,
-                             aheader2 out varchar2,
-                             achapters out sys_refcursor);
+  create or replace package pck_opw_test is
+    procedure prc_get_chapters(ahid in number,
+                               ahc in out number,
+                               aheader out varchar2,
+                               aheader2 out varchar2,
+                               achapters out sys_refcursor);
 ```
-On the OPW web page you select the package (if applicable) and procedure and OPW creates a class for you and a code snippet on how to use it, like this:
+On the OPW web page you select the package and procedure (yes, it works with procedures without package as well) and OPW creates a class for you and a code snippet to use the class that looks like this :
 ```
   require_once( "pck_opw_test.prc_get_chapters.php" );
 
@@ -39,5 +40,5 @@ On the OPW web page you select the package (if applicable) and procedure and OPW
 
   }
 ```
-And thats that :)
+And that's that :)
 
