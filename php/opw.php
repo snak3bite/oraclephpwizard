@@ -87,11 +87,12 @@ function main() {
 
       $cm = new Codemaker();
 
-      $code = htmlentities( $cm->make_class( $apc, ORACLE_OBJECT_OWNER, $selectedpack, $selectedproc, false ), ENT_QUOTES );
+      $php_class_code = $cm->make_class( $apc, ORACLE_OBJECT_OWNER, $selectedpack, $selectedproc, false );
+      $php_class_code_screen = htmlentities( $php_class_code, ENT_QUOTES );
 
       if ( ! $cm->get_init_status() ) {
         //fail
-        $makeclasserr = $code; //  cointains error
+        $makeclasserr = $php_class_code_screen; //  cointains error
         $show_class = false; // dont try to show class, isn't created
       } else {
 
@@ -102,7 +103,7 @@ function main() {
             $fname = $selectedproc . '.php';
           }
 
-          $writefilecode = $cm->write_to_file( REPO, $fname, $code, $overwrite_file );
+          $writefilecode = $cm->write_to_file( REPO, $fname, $php_class_code, $overwrite_file );
 
           if ( $writefilecode != 0 ) {
             $show_class = true; // Show code on screen since it wasn't possible to write file
@@ -212,7 +213,7 @@ function main() {
 
   if ( $show_class ) {
     echo '<h2>' . LS_TITLE_CLASS . '</h2>';
-    echo '<pre><code class="language-php">&lt;?php'.NL.BLANKLINE.$code.'?&gt;</code></pre>';
+    echo '<pre><code class="language-php">&lt;?php'.NL.BLANKLINE.$php_class_code_screen.'?&gt;</code></pre>';
   }
 
   if ( ! $show_skeleton && ! $show_class ) {
