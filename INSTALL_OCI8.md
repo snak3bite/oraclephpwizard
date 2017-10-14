@@ -20,7 +20,7 @@ Note: basiclite won’t work and make sure you get 64- or 32-bit version accordi
 ## Update and install required package from CentOS
 ```
 yum update
-yum install gcc prelink php php-devel hp-pear
+yum install gcc prelink php php-devel php-pear
 pear upgrade pear
 ```
 
