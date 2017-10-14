@@ -2,6 +2,19 @@
 require_once( "config.php" );
 require_once( "codemaker.php" );
 
+$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+switch ($lang){
+  case "sv":
+    include("lang_sv.php");
+    break;
+  case "es":
+    include("lang_es.php");
+    break;
+  default:
+    include("lang_en.php");
+    break;
+}
+
 main();
 
 function main() {
@@ -28,19 +41,6 @@ function main() {
   $LS_SHOW_CLASS = "sc";
 
   $LS_NAME = "The OraclePHPWizard";
-
-  $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-  switch ($lang){
-      case "sv":
-          include("lang_sv.php");
-          break;
-      case "es":
-          include("lang_es.php");
-          break;
-      default:
-          include("lang_en.php");
-          break;
-  }
 
   $selectedpack = '';
   $selectedproc = '';
