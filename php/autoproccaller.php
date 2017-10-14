@@ -5,7 +5,8 @@ require_once("config.php");
 class AutoProcCaller {
 
   private $lconn;
-  private $as_err;
+  private $as_err = '';
+  //private $ai_err = 0;
 
 //------------------------------------------------------------------
   public function connectdb() {
