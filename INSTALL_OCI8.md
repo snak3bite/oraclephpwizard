@@ -3,7 +3,7 @@ Oracle Instant Client is one way to connect to Oracle and the PHP Extension OCI8
 This is a brief description on how to install them on CentOS 7. The described method uses only precompiled packages provided by CentOS, Oracle and PECL. If you want to compile PHP this document is not for you.
 
 ## Prerequisites
-Before you do this you need to install Apache. If you are planning to run Oracle on the same machine install that as well before.
+Before you do this you need to install Apache. If you are planning to run Oracle on the same machine install Oracle before as well. There are plenty of information on the web.
 
 ## Get Oracle Instant Client
 Download from http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html if you have CentOS7 64 bit
@@ -57,19 +57,17 @@ echo extension=oci8.so > /etc/php.d/oci8.ini
 apachectl restart
 ```
 
-### Check if it loaded
+### Check if oci8 is loaded
 ```
 [root@ghost ~]# php -m|grep oci
 oci8
 ```
-If that returns oci8 you're good. You can also use 
+If that returns oci8 you're it is working. You can also use
 
-&lt;?php 
-print_r(get_loaded_extensions()); 
-?&gt;
+&lt;?php print_r(get_loaded_extensions()); ?&gt;
 
 ## Resources
-This document was compiled with info found at 
+This document was compiled with info found at
 * https://github.com/NatLibFi/NDL-VuFind2/wiki/Oracle-with-PHP-5.6-or-PHP-7-on-RHEL-6-or-CentOS-7
 * https://vufind.org/wiki/installation:php_oci
 * http://www.oracle.com/technetwork/articles/dsl/technote-php-instant-12c-2088811.html
