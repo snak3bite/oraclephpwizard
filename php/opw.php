@@ -23,6 +23,7 @@ function main() {
 
   if ( ! $apc->connectdb() ) {
     echo LS_ERR_CONNECT;
+    echo NL . $apc->get_errmsg();
     die;
   }
 
