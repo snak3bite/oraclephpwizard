@@ -20,16 +20,16 @@
 require_once( "config.php" );
 require_once( "codemaker.php" );
 
-$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-switch ($lang){
+$lang = substr( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ], 0, 2 );
+switch ( $lang ){
   case "sv":
-    include("lang_sv.php");
+    require("lang_sv.php");
     break;
   case "es":
-    include("lang_es.php");
+    require("lang_es.php");
     break;
   default:
-    include("lang_en.php");
+    require("lang_en.php");
     break;
 }
 
@@ -77,7 +77,6 @@ function main() {
     $selectedpack = $_POST[ $LS_PAC_CODE ];
   }
 
-  //$proc=$_POST[ $LS_PRC_CODE ];
   if ( isset($_POST[ $LS_SHOW_CLASS ] ) && $_POST[ $LS_SHOW_CLASS ] == $LS_SHOW_CLASS ) {
     $show_class = true;
     $chk_show_class = ' checked';
