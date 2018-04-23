@@ -175,6 +175,11 @@ class Codemaker {
     $retval .= IND1 . '}' . NL;
     $retval .= BLANKLINE;
 
+    $retval .= IND1 . 'public function get_htmlsafeoutput( $param ) {' . NL;
+    $retval .= IND2 . 'return ( htmlspecialchars( $this->outvars[ $param ] ) );' . NL;
+    $retval .= IND1 . '}' . NL;
+    $retval .= BLANKLINE;
+
     $retval .= IND1 . 'public function get_curs( $argname ) {' . NL;
     $retval .= IND2 . 'return ( oci_fetch_assoc( $this->curs[ $argname ] ) );' . NL;
     $retval .= IND1 . '}' . NL;
@@ -246,7 +251,7 @@ class Codemaker {
         $this->outs[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
         $this->declvarsize[ $idx ] = '$len' . $entry[ 'ARGUMENT_NAME' ];
         $this->declvarsize[ $idx ] .= ' = ' . ORATYPESIZEPREFIX . $this->check_datatype( $entry[ 'DATA_TYPE' ] ) . ';';
-        $this->outstub[ $idx ] = "echo \$proc->get_output( '" . $entry[ 'ARGUMENT_NAME' ] . "' ); // " . $this->check_datatype( $entry[ 'DATA_TYPE' ] );
+        $this->outstub[ $idx ] = "echo \$proc->get_htmlsafeoutput( '" . $entry[ 'ARGUMENT_NAME' ] . "' ); // " . $this->check_datatype( $entry[ 'DATA_TYPE' ] );
 
       } elseif ( $entry[ 'IN_OUT' ] == 'IN/OUT' ) {
         $this->ins[ $idx ] = $entry[ 'ARGUMENT_NAME' ];
