@@ -18,7 +18,8 @@ define( "PRISMA_CSS", '<link href="prism.css" rel="stylesheet" />' );
 define( "PRISMA_JS", '<script src="prism.js"></script>' );
 
 // Path and filename to definitions of default sizes for oracle types
-define( "DEFSIZELOCATION", "/var/www/html/projects/oraclephpwizard/php/defsizes.php" );
+// Remove this line if you want to include the file elsewhere
+define( "DEFSIZELOCATION", "defsizes.php" );
 
 // Prefix for oracle types default size constants
 // if this is changed all constant names must be chanchged as well

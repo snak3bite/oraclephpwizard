@@ -55,7 +55,10 @@ class Codemaker {
     }
 
     //--start concat
-    $retval = 'require_once("' . DEFSIZELOCATION . '");' . NL . BLANKLINE;
+    if ( defined( 'DEFSIZELOCATION' ) ) {
+      $retval = 'require_once("' . DEFSIZELOCATION . '");' . NL . BLANKLINE;
+    }
+
     $retval .= "class " . $this->classname . " {" . NL . BLANKLINE;
     $retval .= IND1 . 'private $dbconn;' . NL;
     $retval .= IND1 . 'private $invars;' . NL;
