@@ -55,8 +55,10 @@ class Codemaker {
     }
 
     //--start concat
+    $retval = '';
+
     if ( defined( 'DEFSIZELOCATION' ) ) {
-      $retval = 'require_once("' . DEFSIZELOCATION . '");' . NL . BLANKLINE;
+      $retval .= 'require_once("' . DEFSIZELOCATION . '");' . NL . BLANKLINE;
     }
 
     $retval .= "class " . $this->classname . " {" . NL . BLANKLINE;
