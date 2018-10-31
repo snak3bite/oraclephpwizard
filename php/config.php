@@ -4,12 +4,12 @@ define( "DB_PASSWORD", "dbopw" );
 define( "DB_CONNSTR", "localhost/XE" );
 
 // The owner of packages and procedures
-define( "ORACLE_OBJECT_OWNER", "opw" );
+define( "ORACLE_OBJECT_OWNER", DB_USER );
 
 // Path to save files to
 define( "REPO", "/var/www/html/rw" );
 
-define( "COMPANY", "KXE Styrteknik AB" );
+define( "COMPANY", "Me!" );
 
 // Include prisma, nicifier for code on web pages
 // Download prisma from http://prismjs.com/download.html
