@@ -5,13 +5,12 @@ This is a brief description on how to install them on debian bullseye. The descr
 ## Prerequisites
 Before you begin you need to install Apache and PHP.
 ```
-apt update
 apt install php libapache2-mod-php
 ```
 
 If you are planning to run Oracle on the same machine install Oracle before as well. There is plenty of information on the web.
 
-## Update apt db and install required packages from debian
+## Install required packages from debian
 ```
 apt install php-dev php-pear build-essential libaio1
 ```
@@ -40,9 +39,11 @@ unzip instantclient-basic-linux.x64-19.12.0.0.0dbru.zip
 unzip instantclient-sdk-linux.x64-19.12.0.0.0dbru.zip
 ```
 
-### Set the path to client into ld.so.conf
+## Set the path to client into ld.so.conf and update the runtime link path
+If you have the Oracle database on the same machine you might be better off using the LD_LIBRARY_PATH environment variable
 ```
 echo /opt/oracle/instantclient_19_12 > /etc/ld.so.conf.d/oracle-instantclient.conf
+ldconfig
 ```
 
 ## Install the PHP Extension OCI8 using PECL
