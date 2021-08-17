@@ -33,7 +33,7 @@ wget https://download.oracle.com/otn_software/linux/instantclient/1912000/instan
 ```
 
 ## Unzip instantclient
-Make shure that they are located in /opt/oracle else move them there
+Make sure that they are located in /opt/oracle else move them there
 ```
 unzip instantclient-basic-linux.x64-19.12.0.0.0dbru.zip
 unzip instantclient-sdk-linux.x64-19.12.0.0.0dbru.zip
