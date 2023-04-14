@@ -24,25 +24,26 @@ mkdir -p /opt/oracle && cd /opt/oracle
 Download from https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
 It is not nessesary to log in anymore
 
-This document assumes you download version 19.12 (supports Oracle 11.2 and higher). If you pick another version, you need to adjust paths etc below accordingly.
+This document assumes you download version 19.18 (supports Oracle 11.2 and higher). If you pick another version, you need to adjust paths etc below accordingly.
 
 You need both basic and sdk
 ```
-wget https://download.oracle.com/otn_software/linux/instantclient/1912000/instantclient-basic-linux.x64-19.12.0.0.0dbru.zip
-wget https://download.oracle.com/otn_software/linux/instantclient/1912000/instantclient-sdk-linux.x64-19.12.0.0.0dbru.zip
+wget https://download.oracle.com/otn_software/linux/instantclient/1918000/instantclient-basic-linux.x64-19.18.0.0.0dbru.zip
+wget
+https://download.oracle.com/otn_software/linux/instantclient/1918000/instantclient-sdk-linux.x64-19.18.0.0.0dbru.zip
 ```
 
 ## Unzip instantclient
 Make sure that they are located in /opt/oracle else move them there
 ```
-unzip instantclient-basic-linux.x64-19.12.0.0.0dbru.zip
-unzip instantclient-sdk-linux.x64-19.12.0.0.0dbru.zip
+unzip instantclient-basic-linux.x64-19.18.0.0.0dbru.zip
+unzip instantclient-sdk-linux.x64-19.18.0.0.0dbru.zip
 ```
 
 ## Set the path to client into ld.so.conf and update the runtime link path
 If you have the Oracle database on the same machine you might be better off using the LD_LIBRARY_PATH environment variable
 ```
-echo /opt/oracle/instantclient_19_12 > /etc/ld.so.conf.d/oracle-instantclient.conf
+echo /opt/oracle/instantclient_19_18 > /etc/ld.so.conf.d/oracle-instantclient.conf
 ldconfig
 ```
 
@@ -50,7 +51,7 @@ ldconfig
 The normal command is 'pecl install oci8' but that will install the latest version which is not compatible with the PHP version that comes with debian bullseye, so it is necessary to specify the version
 You can read more here: https://pecl.php.net/package/oci8
 
-Note: during the installation you will be asked for a path, this is the answer: instantclient,/opt/oracle/instantclient_19_12
+Note: during the installation you will be asked for a path, this is the answer: instantclient,/opt/oracle/instantclient_19_18
 ```
 pecl install oci8-2.2.0
 ```
