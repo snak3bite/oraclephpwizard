@@ -68,6 +68,6 @@ systemctl restart apache2
 [root@ghost ~]# php -m|grep oci
 oci8
 ```
-If that returns oci8 you're it is working. You can also use
+If that returns oci8 it is working. You can also use
 
 &lt;?php print_r(get_loaded_extensions()); ?&gt;
