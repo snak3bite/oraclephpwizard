@@ -43,7 +43,7 @@ echo /usr/lib/oracle/12.2/client64/lib > /etc/ld.so.conf.d/oracle-instantclient
 
 ## Install the PHP Extension OCI8 using PECL
 The normal command is 'pecl install oci8' but that will install the latest version which is not compatible with the PHP version that comes with CentOS 7 so it is necessary to specify the version
-You can read more here: https://pecl.php.net/package/oci8/download/
+You can read more here: https://pecl.php.net/package/oci8
 
 Note: during the installation you will be asked for a path, this is the answer: instantclient,/usr/lib/oracle/12.2/client64/lib
 ```
