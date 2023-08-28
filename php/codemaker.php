@@ -406,6 +406,7 @@ class Codemaker {
           $datatype == "ORATYPE_CHAR" ||
           $datatype == "ORATYPE_REF_CURSOR" ||
           $datatype == "ORATYPE_CLOB" ||
+          $datatype == "ORATYPE_NCLOB" ||
           $datatype == "ORATYPE_BLOB" ||
           $datatype == "ORATYPE_BFILE" ||
           $datatype == "ORATYPE_CFILE" ||

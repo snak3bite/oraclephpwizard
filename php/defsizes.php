@@ -9,6 +9,7 @@ define( "SIZE_ORATYPE_RAW" , 128 );
 define( "SIZE_ORATYPE_CHAR" , 128 );
 define( "SIZE_ORATYPE_REF_CURSOR" , 128 );
 define( "SIZE_ORATYPE_CLOB" , 128 );
+define( "SIZE_ORATYPE_NCLOB", 128 );
 define( "SIZE_ORATYPE_BLOB" , 128 );
 define( "SIZE_ORATYPE_BFILE" , 128 );
 define( "SIZE_ORATYPE_CFILE" , 128 );
