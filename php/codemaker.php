@@ -181,7 +181,7 @@ class Codemaker {
     $retval .= BLANKLINE;
 
     $retval .= IND1 . 'public function get_htmlsafeoutput( $param ) {' . NL;
-    $retval .= IND2 . 'return ( htmlspecialchars( $this->outvars[ $param ] ) );' . NL;
+    $retval .= IND2 . 'return ( htmlspecialchars( $this->outvars[ $param ] ?? "" ) );' . NL;
     $retval .= IND1 . '}' . NL;
     $retval .= BLANKLINE;
 
